@@ -47,7 +47,7 @@ public abstract class SpheroProvider {
 	
 	/* Grab the robot names from Java array */
 	public string[] GetRobotNames() {
-		Debug.Log(m_PairedSpheros);
+		//Debug.Log(m_PairedSpheros);
 		// Store the robots that are paired into an array
 		string[] robotNames = new string[m_PairedSpheros.Length];	
 		for( int i = 0; i < m_PairedSpheros.Length; i++ ) {

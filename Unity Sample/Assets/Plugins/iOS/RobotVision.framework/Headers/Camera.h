@@ -9,7 +9,7 @@
 #ifndef __RobotVision__Camera__
 #define __RobotVision__Camera__
 
-#include "AuPlatformConfiguration.h"
+#include "AureDef.h"
 
 namespace RobotVision {
     

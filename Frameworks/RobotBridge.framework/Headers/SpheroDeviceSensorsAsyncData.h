@@ -15,7 +15,6 @@
 #include "DecodableObject.h"
 #include "SpheroDeviceSensorsData.h"
 #include "SpheroDeviceMessage.h"
-#include "json.h"
 
 namespace RobotBridge {
     class SpheroDeviceSensorsAsyncData : public SpheroDeviceMessage, public DecodableObject {

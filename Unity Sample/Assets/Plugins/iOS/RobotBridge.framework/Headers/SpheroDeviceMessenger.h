@@ -33,8 +33,8 @@ class SpheroDeviceMessenger {
     
     private:
         static SpheroDeviceMessenger instance;
-        SpheroDeviceMessenger();
-        ~SpheroDeviceMessenger();
+        SpheroDeviceMessenger() {}
+        ~SpheroDeviceMessenger() {}
     
         SpheroDeviceMessenger(const SpheroDeviceMessenger&);
         SpheroDeviceMessenger& operator=(const SpheroDeviceMessenger&);

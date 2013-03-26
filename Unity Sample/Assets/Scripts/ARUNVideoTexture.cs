@@ -49,7 +49,7 @@ public class ARUNVideoTexture : MonoBehaviour
         else
         {
         	m_textureType = TextureType.None;
-			Debug.Log("Game object has no renderer or gui texture to assign the generated texture to!");
+			//Debug.Log("Game object has no renderer or gui texture to assign the generated texture to!");
         }
 	}
 

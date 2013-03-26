@@ -62,8 +62,6 @@ void ARUNBridgeResultDelegate::onNewResultReady(RobotVision::ARResult *result) {
     arEngine->setResultsDelegate(resultsDelegate);
     
     isArEngineSetup = YES;
-    
-    //[self startVisionEngine];
 }
 
 +(ARUNBridge*)sharedBridge {
@@ -87,6 +85,10 @@ void ARUNBridgeResultDelegate::onNewResultReady(RobotVision::ARResult *result) {
 
 -(void)pauseVisionEngine {
     arEngine->pauseVision();
+}
+
+-(void)quitVisionEngine {
+    arEngine->quitVision();
 }
 
 -(void)updateResults {
@@ -136,11 +138,11 @@ void ARUNBridgeResultDelegate::onNewResultReady(RobotVision::ARResult *result) {
 
 -(void)getFrame:(unsigned char**)img :(int*)width :(int*) height :(int*) stride; {
     // Get result frame data
-    AuImage* resultImage = (currentArResult->virtualCamera())->cameraFrame();
-	*img = resultImage->data;
-	*height = resultImage->rows;
-	*width = resultImage->cols;
-	*stride = resultImage->bytesPerRow;
+    RobotVision::ARImage* resultImage = currentArResult->virtualCamera()->cameraFrame();
+	*img = resultImage->data();
+	*height = resultImage->height();
+	*width = resultImage->width();
+	*stride = resultImage->stride();
 }
 
 -(ARUNResult) getCurrentResultStruct {
@@ -148,12 +150,14 @@ void ARUNBridgeResultDelegate::onNewResultReady(RobotVision::ARResult *result) {
     [self updateResults];
     
     ARUNResult result;
-    result.locatorAlignmentAngle = auxGetLocatorAlignmentAngle();
-    result.calibratingPutCount = auxGetLocatorCalibratingPutCount();
+    result.locatorAlignmentAngle =
+        currentArResult->virtualSphero()->locatorAlignmentAngle();
+    result.calibratingPutCount =
+        currentArResult->virtualSphero()->calibrationPutCount();
     
     ARUNSize backgroundSize;
-    backgroundSize.width = currentArResult->virtualCamera()->cameraFrame()->cols;
-    backgroundSize.height = currentArResult->virtualCamera()->cameraFrame()->rows;
+    backgroundSize.width = currentArResult->virtualCamera()->cameraFrame()->width();
+    backgroundSize.height = currentArResult->virtualCamera()->cameraFrame()->height();
     result.backgroundVideoSize = backgroundSize;
     
     result.trackingState = currentArResult->virtualSphero()->trackingState();
@@ -171,7 +175,7 @@ void ARUNBridgeResultDelegate::onNewResultReady(RobotVision::ARResult *result) {
     
     result.cameraMatrix = currentArResult->virtualCamera()->pose()->matrix();
     
-    result.platformConfig = (*auGetPlatformConfiguration());
+    result.platformConfig = (*(arEngine->camera()->platformConfiguration()));
     
     return result;
 }
@@ -194,6 +198,10 @@ extern "C" {
     
     void _ARUNBridgePauseVisionEngine() {
         [[ARUNBridge sharedBridge] pauseVisionEngine];
+    }
+    
+    void _ARUNBridgeQuitVisionEngine() {
+        [[ARUNBridge sharedBridge] quitVisionEngine];
     }
     
     BOOL _ARUNBridgeVisionIsInitialized() {

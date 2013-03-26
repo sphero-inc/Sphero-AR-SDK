@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include "SpheroDeviceMessage.h"
-#include "json.h"
 #include "DecodableObject.h"
 #include "SpheroAccelerometerData.h"
 #include "SpheroAttitudeData.h"

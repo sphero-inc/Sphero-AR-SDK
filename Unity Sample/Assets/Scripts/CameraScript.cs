@@ -25,7 +25,7 @@ public class CameraScript : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("AureController.Instance not set");
+			//Debug.LogError("AureController.Instance not set");
 		}
 		
 		Camera[] cameras = GetComponentsInChildren<Camera>();

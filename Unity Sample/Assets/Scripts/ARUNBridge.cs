@@ -117,6 +117,9 @@ public class ARUNBridge {
 #endif
 	
 	[DllImport ("__Internal")]
+	public static extern bool _ARUNBridgeQuitVisionEngine();
+	
+	[DllImport ("__Internal")]
 	public static extern bool _ARUNBridgePauseVisionEngine();
 	
 #if UNITY_EDITOR

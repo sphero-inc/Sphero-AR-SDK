@@ -20,6 +20,9 @@
 #include "VirtualSphero.h"
 #include "Pose.h"
 #include "PlatformParameters.h"
+#include "AuxDef.h"
+#include "AureDef.h"
+#include "AuPlatformConfigurationDef.h"
 
 #endif // RobotVision_RobotVision_h
 

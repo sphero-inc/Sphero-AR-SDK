@@ -12,9 +12,9 @@
 #if defined(__cplusplus)
 
 #include <iostream>
+#include "ARImage.h"
 #include "Pose.h"
 #include "ARMacros.h"
-#include "AuImage.h"
 
 namespace RobotVision {
     
@@ -30,7 +30,7 @@ namespace RobotVision {
         Pose* pose_;
         Pose* rawPose_;
         Pose* naturalPose_;
-        AuImage* cameraFrame_;
+        ARImage* cameraFrame_;
         
     public:
         
@@ -40,10 +40,10 @@ namespace RobotVision {
         // Constructors
         VirtualCamera(): pose_(new Pose()), rawPose_(new Pose()), naturalPose_(new Pose()) {};
         
-        VirtualCamera(Pose* pose, Pose* rawPose, Pose* naturalPose, AuImage* cameraFrame):
+        VirtualCamera(Pose* pose, Pose* rawPose, Pose* naturalPose, ARImage* cameraFrame):
                       pose_(pose), rawPose_(rawPose), naturalPose_(naturalPose) {cameraFrame_ = cameraFrame;};
         
-        VirtualCamera(AuImage* cameraFrame):cameraFrame_(cameraFrame),
+        VirtualCamera(ARImage* cameraFrame):cameraFrame_(cameraFrame),
                       pose_(), rawPose_(), naturalPose_(){};
         
         /*!
@@ -65,7 +65,7 @@ namespace RobotVision {
          *  Returns the image class that represents the image header, format, and
          *  actual pixel data of the camera frame
          */
-        AuImage* cameraFrame();
+        ARImage* cameraFrame();
         
     };  // class VirtualCamera
     

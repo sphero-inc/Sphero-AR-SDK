@@ -9,12 +9,7 @@
 #ifndef __RobotVision__Pose__
 #define __RobotVision__Pose__
 
-#if defined(__cplusplus)
-
-#include "Aure.h"
-
-CLASS_DEF(AuQMatrix);
-CLASS_DEF(AuMatrix);
+#include "AureDef.h"
 
 namespace RobotVision {
     
@@ -114,5 +109,4 @@ namespace RobotVision {
     
 }; // namespace RobotVision
 
-#endif // C++
 #endif // defined(__RobotVision__Pose__)

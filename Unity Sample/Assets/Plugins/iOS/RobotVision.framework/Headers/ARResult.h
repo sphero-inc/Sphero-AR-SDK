@@ -14,7 +14,6 @@
 #include "VirtualCamera.h"
 #include "VirtualEnvironment.h"
 #include "VirtualSphero.h"
-#include "AuImage.h"
 #include "ARMacros.h"
 
 namespace RobotVision {

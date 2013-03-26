@@ -13,9 +13,12 @@
 #include <string>
 #include <map>
 #include <set>
-#include "json.h"
 #include "SpheroDeviceMessage.h"
 #include "DecodableObject.h"
+
+namespace Json {
+    class Value;
+}
 
 namespace RobotBridge {
     
@@ -45,7 +48,7 @@ namespace RobotBridge {
             std::set<DecodableObject*>  decodeObjectSet(std::string key);
         
         private:
-            Json::Value jsonObject;
+            Json::Value* jsonObject;
             std::map<std::string,SpheroDeviceMessage*> deviceMessageClasses_;
             std::map<std::string,DecodableObject*> decodableMessageClasses_;
             void initializeMaps();

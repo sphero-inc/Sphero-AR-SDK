@@ -24,6 +24,8 @@ public class TrackerScript : MonoBehaviour
 	//! @brief 	how much to scale the orientation from the old to the new each frame
 	private float QuaternionScale = 0.5f;
 	
+	private bool TrackingSphero = false;
+	
 	//! @get and set the current speed of sharky
 	public float Speed
 	{
@@ -127,6 +129,32 @@ public class TrackerScript : MonoBehaviour
 	// Update is called once per frame
 	private void OnVisionUpdate ()
 	{
+		// Only display objects if we are tracking them
+		if( ARUNBridge.CurrentARResult.SpheroTrackingState != ARUNBridge.FindSpheroState.Tracking &&
+			ARUNBridge.CurrentARResult.SpheroTrackingState != ARUNBridge.FindSpheroState.TrackingPoorly ) {
+			
+			if( TrackingSphero ) {
+				Component[] rendererComponents = GetComponentsInChildren(typeof(Renderer)) ;
+				for(int i = 0; i < rendererComponents.Length; i++)
+				{
+				   	Renderer r = ((Renderer)rendererComponents[i]);
+					r.enabled = false;
+				}
+			}
+			TrackingSphero = false;
+		}
+		else {
+			if( !TrackingSphero ) {
+				Component[] rendererComponents = GetComponentsInChildren(typeof(Renderer)) ;
+				for(int i = 0; i < rendererComponents.Length; i++)
+				{
+				   	Renderer r = ((Renderer)rendererComponents[i]);
+					r.enabled = true;
+				}
+			}
+			TrackingSphero = true;
+		}
+		
 		Vector3 position;
 		Quaternion orientation;
 		GetSpheroTransform(out position, out orientation);

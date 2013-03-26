@@ -37,6 +37,8 @@ namespace RobotVision {
         Pose* naturalPose_;
         ARTrackingState state_;
         ARSpheroVelocity velocity_;
+        int calibrationPutCount_;
+        float locatorAlignmentAngle_;
         
     public:
         
@@ -47,9 +49,12 @@ namespace RobotVision {
         VirtualSphero(): pose_(new Pose()), rawPose_(new Pose()), naturalPose_(new Pose()) {};
         
         VirtualSphero(Pose* pose, Pose* rawPose, Pose* naturalPose,
-                      ARTrackingState trackingState, ARSpheroVelocity velocity):
+                      ARTrackingState trackingState, ARSpheroVelocity velocity,
+                      float locatorAlignmentAngle, int calibrationPutCount):
                       pose_(pose), rawPose_(rawPose), naturalPose_(naturalPose),
-                      state_(trackingState), velocity_(velocity) {};
+                      state_(trackingState), velocity_(velocity),
+                      locatorAlignmentAngle_(locatorAlignmentAngle),
+                      calibrationPutCount_(calibrationPutCount) {};
         
         VirtualSphero(const VirtualSphero& env);
         
@@ -78,6 +83,16 @@ namespace RobotVision {
          *  Returns the velocity that the Sphero is traveling
          */
         ARSpheroVelocity velocity() const;
+        /*
+         * The suggest calibration angle that the 3D model should point
+         * Determined through the locator position changing
+         */
+        float locatorAlignmentAngle() const;
+        /*
+         * The number of times the AREnging has a good estimate of calibration heading
+         * If this is greater than 2, you could probably use locatorAlignmentAngle()
+         */
+        int calibrationPutCount() const;
         
     };  // class VirtualSphero
     

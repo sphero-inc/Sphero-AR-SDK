@@ -48,8 +48,6 @@ extern "C" {
     }ARUNResult;
     
 #endif // #ifdef ARUNBridge_Def
-    
-    //typedef void (*ReceiveDeviceMessageCallback)(const char *);
 }
 
 /*!

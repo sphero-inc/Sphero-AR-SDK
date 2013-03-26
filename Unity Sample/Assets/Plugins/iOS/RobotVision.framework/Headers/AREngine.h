@@ -10,7 +10,7 @@
 #ifndef RobotVision_AREngine_h
 #define RobotVision_AREngine_h
 
-#include "AuImage.h"
+#include "AureDef.h"
 #include "ARResult.h"
 #include "Camera.h"
 #include "PlatformParameters.h"
@@ -50,6 +50,11 @@ namespace RobotVision {
          *  Pauses the vision engine and prevents results from being delivered.
          */
         void pauseVision();
+        
+        /*!
+         *  Quits the vision engine and destroys threads
+         */
+        void quitVision();
         
         /*!
          *  Starts the vision engine and begins processing frames and delivering results.

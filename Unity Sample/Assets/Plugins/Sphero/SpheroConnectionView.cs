@@ -211,7 +211,7 @@ public class SpheroConnectionView : MonoBehaviour {
             // Was it a tap, or a drag-release?
             if ( selected > -1 && selected < m_RobotNames.Length)
             {
-	            Debug.Log("Player selected row " + selected);
+	            //Debug.Log("Player selected row " + selected);
 				// Sweet!
 				if( m_MultipleSpheros ) {
 					ConnectSphero(selected);

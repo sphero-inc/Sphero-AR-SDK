@@ -9,7 +9,7 @@
 #ifndef RobotVision_PlatformParameters_h
 #define RobotVision_PlatformParameters_h
 
-#include "Aux.h"
+#include "AuxDef.h"
 
 typedef struct {
     void* motionManager;

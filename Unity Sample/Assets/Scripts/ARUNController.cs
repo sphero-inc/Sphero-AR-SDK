@@ -51,24 +51,19 @@ public class ARUNController : SingletonBehaviour<ARUNController>
 			m_lastTrackingState = newState;
 		}
 		
-		if( newState == ARUNBridge.FindSpheroState.Tracking
-			|| newState == ARUNBridge.FindSpheroState.TrackingPoorly )
+		if (OnVisionWillUpdate != null)
 		{
-			
-			if (OnVisionWillUpdate != null)
-			{
-				OnVisionWillUpdate();
-			}
-	
-			if (OnVisionUpdate != null)
-			{
-				OnVisionUpdate();
-			}
-	
-			if (OnVisionUpdateComplete != null)
-			{
-				OnVisionUpdateComplete();
-			}
+			OnVisionWillUpdate();
+		}
+
+		if (OnVisionUpdate != null)
+		{
+			OnVisionUpdate();
+		}
+
+		if (OnVisionUpdateComplete != null)
+		{
+			OnVisionUpdateComplete();
 		}
 	}
 }

@@ -10,6 +10,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AugmentedRealityScene.unity
   - enabled: 1
-    path: Assets/Scenes/NoSpheroConnectionScene.unity
+    path: Assets/Scenes/NoSpheroConnectedScene.unity
   - enabled: 1
     path: Assets/Scenes/HomeScene.unity
