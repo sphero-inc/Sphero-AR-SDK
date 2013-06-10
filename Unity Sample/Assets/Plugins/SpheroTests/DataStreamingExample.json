@@ -1,0 +1,38 @@
+{"class":"DeviceSensorsAsyncData", "timeStamp":123456, "frameCount":2, 
+	"mask":17293822572867608672,
+	 "dataFrames":[
+	 	{"class":"DeviceSensorsData",
+	 		"accelerometerData":{"class":"AccelerometerData", "normalized.x":1.23, 	
+	 			"normalized.y":1.23, "normalized.z":1.23, 
+	 			"accelerationRaw.x":4096, "accelerationRaw.y":4096, 
+	 			"accelerationRaw.z":4096},
+			"attitudeData":{"class":"AttitudeData", "pitch":45.0, "roll":180.0,
+				"yaw":270.0},
+			"quaternionData":{"class":"QuaternionData", "quaternions.q0":0.3, 
+				"quaternions.q1":0.7, "quaternions.q2":0.3, "quaternions.q3":1.0},
+			"backEMFData":{"class":"BackEMFData", "filtered.rightMotor":200,
+			 	"filtered.leftMotor":200, "raw.rightMotor":200, "raw.leftMotor":200},
+			 "locatorData":{"class":"LocatorData", "position.x":190.2, "position.y":85.6,
+			 	"velocity.x":9.99, "velocity.y":86.4},
+			 "gyroData":{"class":"GyroData", "rotationRate.x":300, "rotationRate.y":300,
+			 	"rotationRate.z":300, "rotationRateRaw.x":300, "rotationRateRaw.y":300,
+			 	"rotationRateRaw.z":300} 
+		},
+		{"class":"DeviceSensorsData",
+	 		"accelerometerData":{"class":"AccelerometerData", "normalized.x":1.23, 	
+	 			"normalized.y":1.23, "normalized.z":1.23},
+			"attitudeData":{"class":"AttitudeData", "pitch":45.0, "roll":180.0,
+				"yaw":270.0},
+			"quaternionData":{"class":"QuaternionData", "quaternions.q0":0.3, 
+				"quaternions.q1":0.7, "quaternions.q2":0.3, "quaternions.q3":1.0},
+			"backEMFData":{"class":"BackEMFData", "filtered.rightMotor":200,
+				 "filtered.leftMotor":200, "raw.rightMotor":200, "raw.leftMotor":200},
+			 "locatorData":{"class":"LocatorData", "position.x":190.2, "position.y":85.6,
+			 	"velocity.x":9.99, "velocity.y":86.4},
+			 "gyroData":{"class":"GyroData", "rotationRate.x":300, "rotationRate.y":300,
+			 	"rotationRate.z":300, "rotationRateRaw.x":300, "rotationRateRaw.y":300,
+			 	"rotationRateRaw.z":300}  
+		}
+		]
+}
+		

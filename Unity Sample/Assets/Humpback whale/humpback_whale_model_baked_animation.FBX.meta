@@ -1,0 +1,263 @@
+fileFormatVersion: 2
+guid: 035a8130f4329504aaa80f75dc72628d
+ModelImporter:
+  fileIDToRecycleName:
+    4300000: humpback_whale_exp1_0
+    7400000: Take 001 //// humpback_whale_model_baked_animation
+    7400002: idle //// humpback_whale_model_baked_animation
+    7400004: idle0 //// humpback_whale_model_baked_animation
+    7400006: idle1 //// humpback_whale_model_baked_animation
+    7400008: idle2 //// humpback_whale_model_baked_animation
+    7400010: idle3 //// humpback_whale_model_baked_animation
+    7400012: fastswim //// humpback_whale_model_baked_animation
+    7400014: swim //// humpback_whale_model_baked_animation
+    7400016: death //// humpback_whale_model_baked_animation
+    7400018: fastswim2 //// humpback_whale_model_baked_animation
+    7400020: dive //// humpback_whale_model_baked_animation
+  serializedVersion: 10
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    generateAnimations: 3
+    bakeSimulation: 0
+    splitAnimations: 1
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: swim
+      firstFrame: 300
+      lastFrame: 460
+      wrapMode: 2
+      loop: 1
+    - name: fastswim
+      firstFrame: 200
+      lastFrame: 280
+      wrapMode: 2
+      loop: 1
+    - name: death
+      firstFrame: 500
+      lastFrame: 1200
+      wrapMode: 0
+      loop: 0
+    - name: fastswim2
+      firstFrame: 1300
+      lastFrame: 1380
+      wrapMode: 2
+      loop: 1
+    - name: dive
+      firstFrame: 1400
+      lastFrame: 1680
+      wrapMode: 0
+      loop: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMesh: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  textMetaNamesToFileIDs:
+    //RootNode:
+      data:
+        first: 1
+        second: d2860100
+      data:
+        first: 4
+        second: b21a0600
+      data:
+        first: 111
+        second: 605fa900
+    Bone001:
+      data:
+        first: 1
+        second: c6860100
+      data:
+        first: 4
+        second: a61a0600
+    Bone002:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+    Bone003:
+      data:
+        first: 1
+        second: c4860100
+      data:
+        first: 4
+        second: a41a0600
+    Bone004:
+      data:
+        first: 1
+        second: b6860100
+      data:
+        first: 4
+        second: 961a0600
+    Bone005:
+      data:
+        first: 1
+        second: b4860100
+      data:
+        first: 4
+        second: 941a0600
+    Bone006:
+      data:
+        first: 1
+        second: b2860100
+      data:
+        first: 4
+        second: 921a0600
+    Bone007:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+    Bone008:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+    Bone009:
+      data:
+        first: 1
+        second: ca860100
+      data:
+        first: 4
+        second: aa1a0600
+    Bone010:
+      data:
+        first: 1
+        second: a0860100
+      data:
+        first: 4
+        second: 801a0600
+    Bone011:
+      data:
+        first: 1
+        second: c2860100
+      data:
+        first: 4
+        second: a21a0600
+    Bone012:
+      data:
+        first: 1
+        second: bc860100
+      data:
+        first: 4
+        second: 9c1a0600
+    Bone013:
+      data:
+        first: 1
+        second: ba860100
+      data:
+        first: 4
+        second: 9a1a0600
+    Bone014:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+    Bone015:
+      data:
+        first: 1
+        second: be860100
+      data:
+        first: 4
+        second: 9e1a0600
+    Bone016:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+    Bone017:
+      data:
+        first: 1
+        second: a8860100
+      data:
+        first: 4
+        second: 881a0600
+    Bone018:
+      data:
+        first: 1
+        second: cc860100
+      data:
+        first: 4
+        second: ac1a0600
+    Bone019:
+      data:
+        first: 1
+        second: b8860100
+      data:
+        first: 4
+        second: 981a0600
+    Bone020:
+      data:
+        first: 1
+        second: a6860100
+      data:
+        first: 4
+        second: 861a0600
+    Bone021:
+      data:
+        first: 1
+        second: aa860100
+      data:
+        first: 4
+        second: 8a1a0600
+    Bone022:
+      data:
+        first: 1
+        second: c8860100
+      data:
+        first: 4
+        second: a81a0600
+    Bone023:
+      data:
+        first: 1
+        second: ce860100
+      data:
+        first: 4
+        second: ae1a0600
+    Bone024:
+      data:
+        first: 1
+        second: c0860100
+      data:
+        first: 4
+        second: a01a0600
+    humpback_whale_exp1_0:
+      data:
+        first: 1
+        second: d0860100
+      data:
+        first: 4
+        second: b01a0600
+      data:
+        first: 137
+        second: a00bd100
