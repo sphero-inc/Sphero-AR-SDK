@@ -19,7 +19,8 @@
  * @sa RKDeviceMessenger
  */
 @interface RKDeviceAsyncData : RKDeviceMessage {
-    
 }
+
+@property ( readwrite ) int dataLength;
 
 @end

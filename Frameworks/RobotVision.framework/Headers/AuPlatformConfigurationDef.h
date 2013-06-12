@@ -12,6 +12,7 @@
 CLASS_BEGIN(AuDeviceCameraConfiguration)
     au_scalar near, width, height;
     int rows, cols;
+//    AU_ENUM videoFormat;
 CLASS_END
 
 CLASS_BEGIN(AuDeviceDisplayConfiguration)

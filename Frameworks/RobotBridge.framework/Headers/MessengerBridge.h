@@ -12,13 +12,17 @@
 #include <map>
 #include "SpheroDeviceMessenger.h"
 
+#ifdef __cplusplus
 extern "C" {
+#endif
 	typedef void (*ReceivedMessageCallback)(const char *);
 	typedef void (*SendMessageCallback)(const char *);
     typedef void (*UpdateMaskCallback)(const char *);
     extern void RegisterReceivedMessageCallback(ReceivedMessageCallback callback, const char* mask);
     extern void SetUpdateMaskCallback(const char *);
-}
+#ifdef __cplusplus
+    }
+#endif
 
 namespace RobotBridge {
 

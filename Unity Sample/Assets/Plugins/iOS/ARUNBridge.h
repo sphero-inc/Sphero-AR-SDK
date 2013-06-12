@@ -53,32 +53,61 @@ extern "C" {
 /*!
  *  iOS specific implementation of the result delegate in RobotVision
  */
-class ARUNBridgeResultDelegate : public RobotVision::ARResultsDelegate {
+class ARUNBridge : public RobotVision::ARResultsDelegate {
 public:
-    ARUNBridgeResultDelegate() {}
-    virtual ~ARUNBridgeResultDelegate() {}
+    
+    static ARUNBridge& sharedInstance();
+    
     void onNewResultReady(RobotVision::ARResult* result);
-};
+    
+    void initializeBridge(RobotVision::PlatformParameters parameters);
+    
+    RobotVision::AREngine* arEngine();
+    bool isInitialized();
+    void getFrame(unsigned char** img, int* width, int* height, int* stride);
+    ARUNResult getCurrentResultStruct();
+    void updateResults();
 
-@interface ARUNBridge : NSObject {
-    BOOL robotOnline;
-    RobotVision::AREngine* arEngine;
-    RobotVision::ARResult* currentArResult;
-    RobotVision::ARResult* queuedArResult;
-    PlatformParameters platformParams;
-    CMMotionManager* motionManager;
-    ARUNBridgeResultDelegate* resultsDelegate;
+    bool hasNewFrame() const;
+    
+private:
+    
+    static ARUNBridge *s_pInstance;
+    ARUNBridge();
+    virtual ~ARUNBridge();
+    
+    RobotVision::AREngine* arEngine_;
+    RobotVision::ARResult* currentArResult_;
+    RobotVision::ARResult* queuedArResult_;
+    
     pthread_mutex_t currentResultLock_;
     pthread_mutex_t queuedResultLock_;
-    BOOL isInitialized;
-    BOOL isArEngineSetup;
+    
+    RobotVision::PlatformParameters platformParams_;
+    
+    bool isInitialized_;
+    bool isArEngineSetup_;
+};
+
+inline RobotVision::AREngine* ARUNBridge::arEngine() {
+    return arEngine_;
 }
 
-@property (nonatomic, readwrite) BOOL robotOnline;
-@property (nonatomic, readwrite) BOOL isInitialized;
+inline bool ARUNBridge::isInitialized() {
+    return isInitialized_;
+}
 
 
-+(ARUNBridge*)sharedBridge;
--(void)onDeliveryWithResult:(RobotVision::ARResult*)result;
+@interface ARUNBridge_iOS : NSObject {
+    CMMotionManager* motionManager;
+}
+
++(ARUNBridge_iOS*)sharedBridge;
+-(void)initializeEngineWithCameraMode:(RobotVision::ARCameraMode)mode;
 
 @end
+
+inline bool ARUNBridge::hasNewFrame() const
+{
+    return queuedArResult_ != NULL;
+}
