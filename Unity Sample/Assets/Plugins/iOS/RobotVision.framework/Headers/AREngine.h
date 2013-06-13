@@ -22,6 +22,7 @@ namespace RobotVision {
     class DeviceSensors;
     class SpheroSensors;
     class Camera;
+    class ARVector;
     
     typedef enum {
         AR_SUCCESS = 0,
@@ -47,10 +48,20 @@ namespace RobotVision {
         void initializeEngine(PlatformParameters parameters);
         
         /*!
+         *  Get auPlatformConfiguration for initialization purposes.
+         */
+        AuPlatformConfiguration* getPlatformConfiguration();
+
+        /*!
          *  Pauses the vision engine and prevents results from being delivered.
          */
         void pauseVision();
         
+        /*!
+         *  Resumes the vision engine and starts frame delivery (again).
+         */
+        void resumeVision();
+
         /*!
          *  Quits the vision engine and destroys threads
          */
@@ -80,7 +91,14 @@ namespace RobotVision {
          */
         void onFrameDelivered(AuImage* image);
         
-        /*! 
+        /*!
+         *  Check whether the AREnging has been successfully initialized or not
+         *
+         *  @return whether initializeEngine has been successfully called or not
+         */
+        bool visionInitialized();
+
+        /*!
          * Static method callbacks for talking to Fabrizio's Vision Engine
          */
         static AU_ERROR acquireFrame(AuImage** auImageFrame, au_time* time);
@@ -88,6 +106,7 @@ namespace RobotVision {
         static void logMethod(char* message);
         static au_time getTime(void);
         static void onVisionTaskComplete(AuVisionTask* task, AuImage* img, au_time time, AU_ERROR err);
+        static void deliverResult(AuImage* img, au_time time);
         static void requestColorChange(const au_scalar*const rgb);
         static void focusCameraAtPointMethod(const au_scalar row, const au_scalar col);
         static au_bool cameraIsFocusingMethod(void);
@@ -119,9 +138,16 @@ namespace RobotVision {
         bool visionPaused_;
         bool visionInitialized_;
         
+        
         static AuImage* latestImage_;
         static pthread_mutex_t latestFrameLock_;
         static ARResultsDelegate* resultsDelegate_;
+        static bool shouldFixScale_;
+        static float fixedScale_;
+        
+        static void applyScaleTo(AuMatrix* matrix, float scale);
+        static void applyScaleTo(AuQMatrix* qMatrix, float scale);
+        static void applyScaleTo(ARVector* vector, float scale);
     };
     
 } // namespace RobotVision

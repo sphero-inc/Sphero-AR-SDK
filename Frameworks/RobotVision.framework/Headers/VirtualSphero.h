@@ -13,6 +13,7 @@
 #include <iostream>
 #include "Pose.h"
 #include "ARStates.h"
+#include "ARMemoryManaged.h"
 
 namespace RobotVision {
     
@@ -29,7 +30,7 @@ namespace RobotVision {
      * @brief A class that represents the data from the results of the vision engine
      *        It describes the position orientation of the Sphero and tracking state
      */
-    class VirtualSphero {
+    class VirtualSphero : public RobotVision::ARMemoryManaged {
         
     private:
         Pose* pose_;
@@ -39,6 +40,7 @@ namespace RobotVision {
         ARSpheroVelocity velocity_;
         int calibrationPutCount_;
         float locatorAlignmentAngle_;
+        double time_;
         
     public:
         
@@ -46,11 +48,8 @@ namespace RobotVision {
         virtual ~VirtualSphero();
         
         // Constructors
-        VirtualSphero(): pose_(new Pose()), rawPose_(new Pose()), naturalPose_(new Pose()) {};
-        
-        VirtualSphero(Pose* pose, Pose* rawPose, Pose* naturalPose,
-                      ARTrackingState trackingState, ARSpheroVelocity velocity,
-                      float locatorAlignmentAngle, int calibrationPutCount):
+        VirtualSphero(Pose* pose, Pose* rawPose, Pose* naturalPose, ARTrackingState trackingState,
+                      ARSpheroVelocity velocity, float locatorAlignmentAngle, int calibrationPutCount) :
                       pose_(pose), rawPose_(rawPose), naturalPose_(naturalPose),
                       state_(trackingState), velocity_(velocity),
                       locatorAlignmentAngle_(locatorAlignmentAngle),
@@ -93,6 +92,7 @@ namespace RobotVision {
          * If this is greater than 2, you could probably use locatorAlignmentAngle()
          */
         int calibrationPutCount() const;
+
         
     };  // class VirtualSphero
     

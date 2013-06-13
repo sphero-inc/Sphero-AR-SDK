@@ -2,7 +2,7 @@
 //  RobotVision.h
 //  RobotVision
 //
-//  Created by Jon Carroll on 4/13/12.
+//  Created by Michael DePhillips on 3/10/13.
 //  Copyright (c) 2012 Orbotix, Inc. All rights reserved.
 //
 

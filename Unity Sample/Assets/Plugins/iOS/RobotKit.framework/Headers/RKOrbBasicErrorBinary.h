@@ -13,11 +13,11 @@
  * register as an asynchronous data observer with RKDeviceMessenger.
  */
 @interface RKOrbBasicErrorBinary : RKDeviceAsyncData {
-    @private
-    NSData *errorData;
+@private
+   NSData *errorData;
 }
 
 /*! The binary error data returned from the Sphero */
-@property (nonatomic, readonly) NSData *errorData;
+@property ( nonatomic, readonly ) NSData *errorData;
 
 @end

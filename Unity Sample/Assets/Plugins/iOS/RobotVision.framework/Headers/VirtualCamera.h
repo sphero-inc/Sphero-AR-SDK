@@ -15,6 +15,7 @@
 #include "ARImage.h"
 #include "Pose.h"
 #include "ARMacros.h"
+#include "ARMemoryManaged.h"
 
 namespace RobotVision {
     
@@ -23,7 +24,7 @@ namespace RobotVision {
      *        It describes the position orientation of the device camera and the camera
      *        frame that was analyzed to produce this result.
      */
-    class VirtualCamera {
+    class VirtualCamera : public RobotVision::ARMemoryManaged {
         
     private:
         DISALLOW_COPY_AND_ASSIGN(VirtualCamera);
@@ -38,13 +39,11 @@ namespace RobotVision {
         virtual ~VirtualCamera();
         
         // Constructors
-        VirtualCamera(): pose_(new Pose()), rawPose_(new Pose()), naturalPose_(new Pose()) {};
+        VirtualCamera(Pose* pose, Pose* rawPose, Pose* naturalPose, ARImage* cameraFrame);
         
-        VirtualCamera(Pose* pose, Pose* rawPose, Pose* naturalPose, ARImage* cameraFrame):
-                      pose_(pose), rawPose_(rawPose), naturalPose_(naturalPose) {cameraFrame_ = cameraFrame;};
-        
-        VirtualCamera(ARImage* cameraFrame):cameraFrame_(cameraFrame),
-                      pose_(), rawPose_(), naturalPose_(){};
+        // I don't like this one, commenting out to see if anything needs it
+//        VirtualCamera(ARImage* cameraFrame):cameraFrame_(cameraFrame),
+//                      pose_(), rawPose_(), naturalPose_(){};
         
         /*!
          *  Returns either the raw pose or the natural pose depending on your preference

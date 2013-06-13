@@ -14,6 +14,7 @@
 #include <iostream>
 #include "Floor.h"
 #include "Light.h"
+#include "ARMemoryManaged.h"
 
 namespace RobotVision {
     
@@ -22,7 +23,7 @@ namespace RobotVision {
      *        It describes the environment of the ARResult.  For example, the color
      *        of the lighting, or the color of the floor.
      */
-    class VirtualEnvironment {
+    class VirtualEnvironment : public ARMemoryManaged {
         
     private:
         Floor* floor_;
@@ -34,13 +35,10 @@ namespace RobotVision {
         virtual ~VirtualEnvironment();
         
         // Constructors
-        VirtualEnvironment(): floor_(new Floor()), light_(new Light()) {};
         VirtualEnvironment(Floor* floor, Light* light):
                            floor_(floor), light_(light) {};
         
         VirtualEnvironment(const VirtualEnvironment& env);
-        
-        // Overloaded operator
         VirtualEnvironment& operator=(const VirtualEnvironment& env);
         
         /*!
