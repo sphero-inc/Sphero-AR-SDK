@@ -29,7 +29,6 @@ void SpheroDataStreamingDelegate::onSerializedMessageDelivered(const char *messa
     self = [super init];
     
     robotOnline = NO;
-    [ARUNBridge sharedBridge].robotOnline = NO;
     controllerStreamingOn = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground) name:UIApplicationWillTerminateNotification object:nil];
@@ -59,19 +58,21 @@ void SpheroDataStreamingDelegate::onSerializedMessageDelivered(const char *messa
 
 -(void)connectToRobot {
     /*Try to connect to the robot*/
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRobotOnline) name:RKDeviceConnectionOnlineNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDidGainControl:) name:RKRobotDidGainControlNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRobotOffline) name:RKDeviceConnectionOfflineNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRobotOffline) name:RKRobotDidLossControlNotification object:nil];
-    robotInitialized = NO;
+    if( !robotInitialized ) {
+        /*Try to connect to the robot*/
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRobotOnline) name:RKDeviceConnectionOnlineNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRobotOnline) name:RKRobotDidGainControlNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRobotOffline) name:RKDeviceConnectionOfflineNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRobotOffline) name:RKRobotDidLossControlNotification object:nil];
+    }
     if ([[RKRobotProvider sharedRobotProvider] isRobotUnderControl]) {
         [[RKRobotProvider sharedRobotProvider] openRobotConnection];        
     }
-    robotInitialized = YES;
+
 }
 
 -(void)appWillEnterBackground {
-    //[[RKRobotProvider sharedRobotProvider] closeRobotConnection];
+    [[RKRobotProvider sharedRobotProvider] closeRobotConnection];
 }
 
 - (void)handleRobotOnline {
@@ -82,7 +83,7 @@ void SpheroDataStreamingDelegate::onSerializedMessageDelivered(const char *messa
         receiveDeviceMessageCallback([[encoder stringRepresentation] UTF8String]);
     }
     robotOnline = YES;
-    [ARUNBridge sharedBridge].robotOnline = YES;
+    robotInitialized = YES;
     
 }
 
@@ -94,12 +95,13 @@ void SpheroDataStreamingDelegate::onSerializedMessageDelivered(const char *messa
         receiveDeviceMessageCallback([[encoder stringRepresentation] UTF8String]);
     }
     robotOnline = NO;
-    [ARUNBridge sharedBridge].robotOnline = NO;
 }
 
 -(void)handleDidGainControl:(NSNotification*)notification {
     if(!robotInitialized)return;
-    [[RKRobotProvider sharedRobotProvider] openRobotConnection];
+    [[RKRobotProvider sharedRobotProvider] performSelector:@selector(openRobotConnection)
+                                                withObject:nil
+                                                afterDelay:1.0f];
 }
 
 - (void)addDataStreamingWithMask:(uint64_t)mask
@@ -235,6 +237,10 @@ extern "C" {
     
     void setBackLED(float intensity) {
         [RKBackLEDOutputCommand sendCommandWithBrightness:intensity];
+    }
+    
+    void configureLocatorCommand(RKConfigureLocatorFlag flag, int newX, int newY, int newYaw) {
+        [RKConfigureLocatorCommand sendCommandForFlag:flag newX:newX newY:newY newYaw:newYaw];
     }
     
 	void _RegisterRecieveDeviceMessageCallback(ReceiveDeviceMessageCallback callback) {

@@ -14,6 +14,7 @@
 #include <iostream>
 #include "AureDef.h"
 #include "ARMacros.h"
+#include "ARMemoryManaged.h"
 
 namespace RobotVision {
     
@@ -22,7 +23,7 @@ namespace RobotVision {
      *        It contains all the information you need to do an OpenGL call to
      *        draw the image as a 2D texture.
      */
-    class ARImage {
+    class ARImage : public RobotVision::ARMemoryManaged {
         
     private:
         DISALLOW_COPY_AND_ASSIGN(ARImage);
@@ -31,11 +32,10 @@ namespace RobotVision {
     public:
         
         // Deconstructor
-        virtual ~ARImage() {}
+        virtual ~ARImage();
                 
         // Constructors
-        ARImage() {}
-        ARImage(AuImage* image): auImage_(image) {};
+        ARImage(AuImage* image);
         
         /*!
          *  Returns the width of the image
@@ -53,15 +53,6 @@ namespace RobotVision {
          *  Returns the bytes of data of the image
          */
         unsigned char* data() const;
-        
-        /*!
-         *  AREngine controls these - do not call if you are a developer!
-         */
-        void retain();
-        /*!
-         *  AREngine controls these - do not call if you are a developer!
-         */
-        void release();
         
     };  // class ARImage
     

@@ -24,17 +24,17 @@
  */
 
 @interface RKDeviceResponse : RKDeviceMessage {
-	@protected
-	NSInteger   code;
-    BOOL        propertiesValid;
+@protected
+   NSInteger code;
+   BOOL propertiesValid;
 }
 
 /*! The response code returned from the robot. */
-@property (nonatomic, readonly) NSInteger   code;
+@property ( nonatomic, readonly ) NSInteger code;
 /*!
  * Indicates that the properties return in the response are valid. The
  * default value is YES. This will get set to NO if the response returned with a error.
  */
-@property (nonatomic, readonly) BOOL        propertiesValid;
+@property ( nonatomic, readonly ) BOOL propertiesValid;
 
 @end

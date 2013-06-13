@@ -13,6 +13,7 @@
 TypeName(const TypeName&);\
 void operator=(const TypeName&)
 
-#define SAFE_DELETE(x) {delete x; x = NULL;}
+#define SAFE_DELETE(x) {if((x)){delete (x); (x) = NULL;}}
+#define SAFE_FREE(x) {[(x) release]; (x)=NULL;}
 
 #endif

@@ -15,10 +15,11 @@
 #include "VirtualEnvironment.h"
 #include "VirtualSphero.h"
 #include "ARMacros.h"
+#include "ARMemoryManaged.h"
 
 namespace RobotVision {
     
-    class ARResult {
+    class ARResult : public RobotVision::ARMemoryManaged {
         
     private:
 
@@ -27,7 +28,9 @@ namespace RobotVision {
         VirtualSphero* sphero_;
         VirtualCamera* camera_;
         AREngineState engineState_;
-        int refCount_;
+        double time_;
+        
+        ARResult() {};
         
     public:
         
@@ -35,14 +38,11 @@ namespace RobotVision {
         virtual ~ARResult();
         
         // Constructors
-        ARResult(): camera_(new VirtualCamera()),
-                    environment_(new VirtualEnvironment()),
-                    sphero_(new VirtualSphero()) {};
-        
         ARResult(VirtualCamera* camera,
                  VirtualEnvironment* environment,
                  VirtualSphero* sphero,
-                 AREngineState engineState);
+                 AREngineState engineState,
+                 double time);
         
         /*!
          *  Returns the data as result of the vision engine tracking relating to the camera
@@ -64,24 +64,10 @@ namespace RobotVision {
         AREngineState engineState() const;
         
         /*!
-         *  Returns the reference count of this result, this object is deleted
-         *  when it gets to zero
+         *  The time stamp associated with this data.
          */
-        int refCount() {return refCount_; }
-        
-        /*!
-         *  Increments the reference count, which retains the data in this class, 
-         *  be sure to call this when you are passed this class and don't want its 
-         *  memory to be deleted
-         */
-        void retain();
-        /*!
-         *  Decrements the reference count of this object. Be sure to call this method,
-         *  when you are done using this object, or else you will get memory leaks and
-         *  problems with camera frames.
-         */
-        void release();
-        
+        double time() const;
+
     };  // class ARResult
     
 } // namespace RobotVision

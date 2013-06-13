@@ -26,7 +26,7 @@ namespace RobotVision {
         Camera() {}
         virtual ~Camera() {}
         
-        virtual AuPlatformConfiguration* platformConfiguration() {}
+        virtual AuPlatformConfiguration* platformConfiguration() {  return NULL;    }
         virtual void setFrameDeliveryDelegate(FrameDeliveryDelegate* delegate) {}
         virtual void pauseCamera() {}
         virtual void resumeCamera() {}

@@ -11,9 +11,20 @@
 
 #include "AuxDef.h"
 
+namespace RobotVision {
+
 typedef struct {
     void* motionManager;
     AUX_CAMERA_MOTION_MODE mode;
+    void* queue;
 } PlatformParameters;
+
+typedef enum  ARCameraMode
+{
+    CAMERA_MODE_ALLOW_VERTICAL_MOVEMENT = 0,
+    CAMERA_MODE_STATIC_HEIGHT
+} ARCameraMode;
+    
+}; // namespace RobotVision
 
 #endif

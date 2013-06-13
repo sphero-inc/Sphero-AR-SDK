@@ -110,6 +110,8 @@ enum _AU_ERROR
     AU_BAD_SOURCE_IMAGE_FORMAT = 1000,
     AU_BAD_TARGET_IMAGE_FORMAT,
     
+    AU_BAD_COMPRESSION_FACTOR,
+    
     AU_BAD_SOURCE_IMAGE_SIZE,
     AU_BAD_TARGET_IMAGE_SIZE,
     
@@ -158,6 +160,9 @@ CLASS_DEF(AuImage)
 typedef union {
     struct {
         au_scalar R, G, B;
+    };
+    struct {
+        au_scalar Y, U, V;
     };
     au_scalar values[3];
 } AuColor;
