@@ -111,8 +111,8 @@ public class ARUNBridge {
 	public static void UpdateArResults() {
 		CurrentARResult = _ARUNBridgeGetCurrentResult();
 	}
-	
-#if UNITY_IPHONE && !UNITY_EDITOR
+
+#if UNITY_IPHONE
 	[DllImport ("__Internal")]
 	public static extern bool _ARUNHasNewFrame();
 #else
@@ -132,7 +132,7 @@ public class ARUNBridge {
 	public static float GetDeviceYaw() {
 		// Call down into the JNI	
 		return -(m_RVDeviceSensors.Call<float>("getYaw"));
-	
+	}
 #elif UNITY_IPHONE || UNITY_EDITOR
 	public static float GetDeviceYaw() {
 		return Input.gyro.attitude.eulerAngles.z;	
