@@ -9,7 +9,7 @@
 #ifndef RobotVision_AuVector_h
 #define RobotVision_AuVector_h
 
-#include "Aure.h"
+#include "AureDef.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,7 +17,7 @@ extern "C" {
 
     
 //  Non-T-Versions
-CLASS_DEF(AuMatrix)   //  Already defined in header
+//CLASS_DEF(AuMatrix)   //  Already defined in header
 CLASS_DEF(AuQuaternion)
 //CLASS_DEF(AuQMatrix)
 
@@ -25,12 +25,28 @@ CLASS_DEF(AuQuaternion)
 CLASS_BEGIN(AuQuaternion)
 au_scalar w, x, y, z;
 CLASS_END
+
+//    typedef union {
+//        au_scalar entries[16];
+//        struct {
+//            au_scalar m11, m12, m13, m14;
+//            au_scalar m21, m22, m23, m24;
+//            au_scalar m31, m32, m33, m34;
+//            au_scalar m41, m42, m43, m44;
+//        };
+//    } AuMatrix;
+    
     
 CLASS_BEGIN(AuMatrix)
-au_scalar m11, m12, m13, m14;
-au_scalar m21, m22, m23, m24;
-au_scalar m31, m32, m33, m34;
-au_scalar m41, m42, m43, m44;
+    union {
+        struct {
+            au_scalar m11, m12, m13, m14;
+            au_scalar m21, m22, m23, m24;
+            au_scalar m31, m32, m33, m34;
+            au_scalar m41, m42, m43, m44;
+        };
+        au_scalar entries[16];
+    };
 CLASS_END
 
 
@@ -55,6 +71,8 @@ CLASS_END
     
     void AuQuaternionMultiply(const AuQuaternion* p, const AuQuaternion* q, AuQuaternion* product);
     
+    void AuMatrixMultiply3(const AuMatrix* a, const AuMatrix* b, const AuMatrix* c, AuMatrix* prod);
+
     //  Apply a quaternion to a vector by conjugation.
     void AuQuaternionConjugateVector(const AuQuaternion* q, const au_scalar* xyzIn, au_scalar* xyzOut);
     
@@ -126,6 +144,8 @@ prod->m44 = a.m41 * b.m14 + a.m42 * b.m24 + a.m43 * b.m34 + a.m44 * b.m44;
     void AuMatrixSetToZero(AuMatrix* a);
 
     void AuMatrixReport(const AuMatrix* m);
+
+    void AuMatrixReportOrientation(const AuMatrix* m);
 
 #pragma mark -
 #pragma mark AuQMatrix

@@ -30,6 +30,7 @@ namespace RobotVision {
         virtual void setFrameDeliveryDelegate(FrameDeliveryDelegate* delegate) {}
         virtual void pauseCamera() {}
         virtual void resumeCamera() {}
+        virtual bool isFocusing() { return false; }
         
     private:
         FrameDeliveryDelegate* delegate_;
