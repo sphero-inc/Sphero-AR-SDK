@@ -112,16 +112,16 @@ public class ARUNBridge {
 		CurrentARResult = _ARUNBridgeGetCurrentResult();
 	}
 	
-// #if UNITY_IPHONE
-// 	[DllImport ("__Internal")]
-// 	public static extern bool _ARUNHasNewFrame();
-// #else
+#if UNITY_IPHONE && !UNITY_EDITOR
+	[DllImport ("__Internal")]
+	public static extern bool _ARUNHasNewFrame();
+#else
 	public static bool _ARUNHasNewFrame()
 	{
 		// TODO: implement me!
 		return true;
 	}
-// #endif
+#endif
 
 	
 #if UNITY_ANDROID	
@@ -208,17 +208,17 @@ public class ARUNBridge {
 		public static extern bool _ARUNBridgeVisionIsInitialized();
 #endif
 	
-// #if !UNITY_EDITOR
-// #	if UNITY_IOS
-// 	[DllImport ("__Internal")]
-// #	elif UNITY_ANDROID
-// 	[DllImport ("unity_bridge")]
-// #	endif
-// 	public static extern string _GetVersionString();
-// #else
+#if !UNITY_EDITOR
+#	if UNITY_IOS
+	[DllImport ("__Internal")]
+#	elif UNITY_ANDROID
+	[DllImport ("unity_bridge")]
+#	endif
+	public static extern string _GetVersionString();
+#else
 	public static string _GetVersionString()
 	{
 		return "N/A";
 	}
-// #endif
+#endif
 }

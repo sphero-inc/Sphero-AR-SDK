@@ -39,31 +39,33 @@ public class ARUNController : SingletonBehaviour<ARUNController>
 			return;
 		}
 		
-		ARUNBridge.UpdateArResults();
-		
-		ARUNBridge.FindSpheroState newState = ARUNBridge.CurrentARResult.SpheroTrackingState;
-		if (m_lastTrackingState != newState)
+		if (ARUNBridge._ARUNHasNewFrame())
 		{
-			if (OnTrackingStateChanged != null)
+			ARUNBridge.UpdateArResults();
+			ARUNBridge.FindSpheroState newState = ARUNBridge.CurrentARResult.SpheroTrackingState;
+			if (m_lastTrackingState != newState)
 			{
-				OnTrackingStateChanged(newState);
+				if (OnTrackingStateChanged != null)
+				{
+					OnTrackingStateChanged(newState);
+				}
+				m_lastTrackingState = newState;
 			}
-			m_lastTrackingState = newState;
-		}
-		
-		if (OnVisionWillUpdate != null)
-		{
-			OnVisionWillUpdate();
-		}
+			
+			if (OnVisionWillUpdate != null)
+			{
+				OnVisionWillUpdate();
+			}
 
-		if (OnVisionUpdate != null)
-		{
-			OnVisionUpdate();
-		}
+			if (OnVisionUpdate != null)
+			{
+				OnVisionUpdate();
+			}
 
-		if (OnVisionUpdateComplete != null)
-		{
-			OnVisionUpdateComplete();
+			if (OnVisionUpdateComplete != null)
+			{
+				OnVisionUpdateComplete();
+			}
 		}
 	}
 }
