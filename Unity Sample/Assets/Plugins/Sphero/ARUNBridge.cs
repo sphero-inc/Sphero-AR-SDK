@@ -111,8 +111,8 @@ public class ARUNBridge {
 	public static void UpdateArResults() {
 		CurrentARResult = _ARUNBridgeGetCurrentResult();
 	}
-	
-#if UNITY_IPHONE && !UNITY_EDITOR
+
+#if UNITY_IPHONE
 	[DllImport ("__Internal")]
 	public static extern bool _ARUNHasNewFrame();
 #else
@@ -123,21 +123,9 @@ public class ARUNBridge {
 	}
 #endif
 
-	
-#if UNITY_ANDROID	
-	private static AndroidJavaObject m_RVDeviceSensors = 
-		(new AndroidJavaClass("com.orbotix.robotvision.RVDeviceSensors"))
-			.CallStatic<AndroidJavaObject>("getSharedInstance");
-	
-	public static float GetDeviceYaw() {
-		// Call down into the JNI	
-		return -(m_RVDeviceSensors.Call<float>("getYaw"));
-	
-#elif UNITY_IPHONE || UNITY_EDITOR
 	public static float GetDeviceYaw() {
 		return Input.gyro.attitude.eulerAngles.z;	
 	}
-#endif
 	
 #if UNITY_EDITOR
 	public static ARUNResult _ARUNBridgeGetCurrentResult()
@@ -147,8 +135,6 @@ public class ARUNBridge {
 #else
 #	if UNITY_IPHONE
 	[DllImport ("__Internal")]
-#	elif UNITY_ANDROID
-	[DllImport ("unity_bridge")]
 #	endif
 	public static extern ARUNResult _ARUNBridgeGetCurrentResult();
 #endif
@@ -158,8 +144,6 @@ public class ARUNBridge {
 #else
 #	if UNITY_IPHONE
 	[DllImport ("__Internal")]
-#	elif UNITY_ANDROID
-	[DllImport ("unity_bridge")]
 #	endif
 	public static extern void _ARUNBridgeInitializeVisionEngine(CameraMotionMode mode);
 #endif
@@ -169,8 +153,6 @@ public class ARUNBridge {
 #else
 #	if UNITY_IPHONE
 		[DllImport ("__Internal")]
-#	elif UNITY_ANDROID
-		[DllImport ("unity_bridge")]
 #	endif
 		public static extern bool _ARUNBridgeStartVisionEngine();
 #endif
@@ -180,8 +162,6 @@ public class ARUNBridge {
 #else
 #	if UNITY_IPHONE
 	[DllImport ("__Internal")]
-#	elif UNITY_ANDROID
-	[DllImport ("unity_bridge")]
 #	endif
 	public static extern bool _ARUNBridgeQuitVisionEngine();
 #endif
@@ -191,8 +171,6 @@ public class ARUNBridge {
 #else
 #	if UNITY_IPHONE
 	[DllImport ("__Internal")]
-#	elif UNITY_ANDROID
-	[DllImport ("unity_bridge")]
 #	endif
 	public static extern bool _ARUNBridgePauseVisionEngine();
 #endif
@@ -202,8 +180,6 @@ public class ARUNBridge {
 #else
 #	if UNITY_IPHONE
 		[DllImport ("__Internal")]
-#	elif UNITY_ANDROID
-		[DllImport ("unity_bridge")]
 #	endif
 		public static extern bool _ARUNBridgeVisionIsInitialized();
 #endif
@@ -211,8 +187,6 @@ public class ARUNBridge {
 #if !UNITY_EDITOR
 #	if UNITY_IOS
 	[DllImport ("__Internal")]
-#	elif UNITY_ANDROID
-	[DllImport ("unity_bridge")]
 #	endif
 	public static extern string _GetVersionString();
 #else
