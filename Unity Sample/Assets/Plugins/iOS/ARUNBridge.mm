@@ -10,7 +10,7 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 #include <pthread.h>
-#include "AppController.h"
+#include "UnityAppController.h"
 
 ARUNBridge* ARUNBridge::s_pInstance = NULL;
 
@@ -30,14 +30,14 @@ ARUNBridge& ARUNBridge::sharedInstance() {
 }
 
 ARUNBridge::ARUNBridge():
-	arEngine_(&RobotVision::AREngine::sharedInstance()),
-	isInitialized_(false),
-	isArEngineSetup_(false),
-	queuedArResult_(NULL),
-	currentArResult_(NULL),
-	platformParams_(),
-	currentResultLock_(),
-	queuedResultLock_()
+arEngine_(&RobotVision::AREngine::sharedInstance()),
+isInitialized_(false),
+isArEngineSetup_(false),
+queuedArResult_(NULL),
+currentArResult_(NULL),
+platformParams_(),
+currentResultLock_(),
+queuedResultLock_()
 {}
 
 ARUNBridge::~ARUNBridge() {
@@ -62,10 +62,10 @@ ARUNBridge::~ARUNBridge() {
 		}
 		pthread_mutex_unlock(&queuedResultLock_);
 	}
-
+    
 	pthread_mutex_destroy(&currentResultLock_);
 	pthread_mutex_destroy(&queuedResultLock_);
-
+    
 	if (s_pInstance == this) {
 		s_pInstance = NULL;
 	}
@@ -94,10 +94,10 @@ void ARUNBridge::onNewResultReady(RobotVision::ARResult *result) {
 		pthread_mutex_lock(&queuedResultLock_);
 		{
 			RobotVision::ARResult* tempResult = queuedArResult_;
-
+            
 			queuedArResult_ = result;
 			queuedArResult_->retain();
-
+            
 			if (tempResult)
 			{
 				tempResult->release();
@@ -145,12 +145,12 @@ void ARUNBridge::updateResults() {
 				if (queuedArResult_)
 				{
 					RobotVision::ARResult* tempResult = currentArResult_;
-
+                    
 					currentArResult_ = queuedArResult_;
 					currentArResult_->retain();
 					queuedArResult_->release();
 					queuedArResult_ = NULL;
-
+                    
 					if( tempResult != NULL ) {
 						tempResult->release();
 					}
@@ -192,7 +192,7 @@ ARUNResult ARUNBridge::getCurrentResultStruct() {
 		velocity.y = currentArResult_->virtualSphero()->velocity().y;
 		result.spheroVelocity = velocity;
 		
-		result.cameraMatrix = currentArResult_->virtualCamera()->pose()->matrix();    
+		result.cameraMatrix = currentArResult_->virtualCamera()->pose()->matrix();
 		result.platformConfig = (*(arEngine_->camera()->platformConfiguration()));
 	}
 	pthread_mutex_unlock(&currentResultLock_);
@@ -201,13 +201,13 @@ ARUNResult ARUNBridge::getCurrentResultStruct() {
 }
 
 extern "C" {
-
+    
 	void _ARUNBridgeInitializeVisionEngine(RobotVision::ARCameraMode mode)
 	{
 		// Initialize iOS bridge and ARUNBridge and try to start vision
 		[[ARUNBridge_iOS sharedBridge] initializeEngineWithCameraMode:mode];
 	}
-		
+    
 	bool _ARUNBridgeStartVisionEngine(RobotVision::ARCameraMode mode) {
 		ARUNBridge::sharedInstance().arEngine()->startVision();
 		// TODO: implement a test if it actually started properlly
@@ -225,13 +225,13 @@ extern "C" {
 	bool _ARUNBridgeVisionIsInitialized() {
 		return ARUNBridge::sharedInstance().isInitialized();
 	}
-
+    
 	char* _GetVersionString()
 	{
 		NSString* version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 		return strdup([version UTF8String]);
 	}
-
+    
 	BOOL _ARUNHasNewFrame()
 	{
 		return ARUNBridge::sharedInstance().hasNewFrame();
@@ -267,7 +267,6 @@ extern "C" {
 }
 
 static ARUNBridge_iOS *sharedBridge = nil;
-extern CMMotionManager *sMotionManager;
 
 @implementation ARUNBridge_iOS
 
@@ -303,11 +302,10 @@ extern CMMotionManager *sMotionManager;
 	platformParams.mode = [self convertMotionMode:mode];
     if(motionManager==nil) {
         NSLog(@"ARUNBRidge - Getting or creating motion manager");
-        if(sMotionManager==nil) {
+        if(motionManager==nil) {
             NSLog(@"ARUNBRidge - Shared motion mangaer doesn't exist, creating one.");
-            sMotionManager = [[CMMotionManager alloc] init];
+            motionManager = [[CMMotionManager alloc] init];
         }
-        motionManager = sMotionManager;
         motionManager.deviceMotionUpdateInterval = 1.0/60.0;
     }
     //if([AppController getQueue]==nil) {

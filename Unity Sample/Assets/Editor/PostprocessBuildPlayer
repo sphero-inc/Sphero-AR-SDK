@@ -52,7 +52,7 @@ resfiles = []
 searchPaths = []
 
 # List of additional linker flags to add to the project
-linkerFlags = ["-lsqlite3.0"]
+linkerFlags = ["-lsqlite3.0", "-all_load"]
 
 # List of info.plist additions. Array format is key, xml value string
 plistAdditions = [["UISupportedExternalAccessoryProtocols", "<array><string>com.orbotix.robotprotocol</string></array>"]]

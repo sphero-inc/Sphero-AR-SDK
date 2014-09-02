@@ -1,5 +1,7 @@
 # Sphero Augmented Reality SDK
 
+    Note: This version of the AR SDK is designed to work with Unity version 4.5 and XCode 5.0.  Check the Unity_3.5.7 if you need to be compatible with Unity 3.x.
+
 ## Overview
 
 The Sphero Augmented Reality (AR) SDK is used to overlay a live view of the real world with virtual content.  For gaming applications in particular, the goal is to render 3D content into the live scene so that it appears to be realistic and authentic. That’s where Sphero rolls in.  Augmented reality gameplay with Sphero is simple and seamless for two reasons – Sphero is a robot, and Sphero is round. This allows us to employ a robotic fiducial, which provides never-before-seen freedom in characterizing the visual environment (since by definition a robot is a reprogrammable machine). With no auxiliary fiducial markers, Sphero can be effectively found and tracked at a distance, at any angle, and when partially obscured. A ball is the same from every angle, after all.
