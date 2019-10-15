@@ -1,3 +1,19 @@
+This repo has been deprecated and archived.
+
+### Want to be updated when new SDKs are released?
+
+Consider [signing up](http://sdk.sphero.com/sign-up) for our SDK email list to be notified when we release new and updates to our SDKs.
+
+### For more information and documentation
+
+Visit our [SDK website](sdk.sphero.com) to find more information about the SDK and the API!
+
+### Where to get help
+
+Visit our [community forum](https://community.sphero.com/c/advanced-programming) to get help, share your project, or help others!
+
+
+
 # Sphero Augmented Reality SDK
 
     Note: This version of the AR SDK is designed to work with Unity version 4.5 and XCode 5.0.  Check the Unity_3.5.7 if you need to be compatible with Unity 3.x.
